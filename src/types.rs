@@ -176,5 +176,5 @@ pub fn is_peak_hour(time: &DateTime<Utc>) -> bool {
     // Convert UTC to PT (UTC-7 for PDT)
     let pt_hour = (time.hour() as i32 - 7).rem_euclid(24) as u32;
     let weekday = time.weekday().num_days_from_monday(); // 0=Mon, 6=Sun
-    weekday < 5 && pt_hour >= 5 && pt_hour < 11
+    weekday < 5 && (5..11).contains(&pt_hour)
 }

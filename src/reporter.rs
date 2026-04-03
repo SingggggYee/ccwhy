@@ -266,10 +266,11 @@ pub fn print_session_detail(session: &SessionSummary) {
     if !session.turns.is_empty() {
         println!();
         println!("  {}", "Per-Turn Token Consumption".bold());
-        println!(
+        let header = format!(
             "  {:>5}  {:>8}  {:>8}  {:>8}  {:>8}  {}",
             "Turn", "Input", "Output", "Cache↑", "Cache↓", "Tools"
         );
+        println!("{header}");
         println!("  {}", "─".repeat(70));
 
         let max_turn_total = session.turns.iter().map(|t| t.total()).max().unwrap_or(1);

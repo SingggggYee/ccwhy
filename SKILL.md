@@ -5,7 +5,20 @@ description: Analyze Claude Code token usage. Shows where tokens went, which pro
 
 # ccwhy
 
-Debug your Claude Code token usage. Run:
+Debug your Claude Code token usage.
+
+## What it does
+
+Parses local JSONL session files in `~/.claude/projects/` to show where tokens went. Breaks down usage by project, tool, model, and identifies anomaly sessions.
+
+## Data access
+
+- Reads ONLY `~/.claude/projects/*/*.jsonl` (local Claude Code session logs)
+- NO network access, NO API keys, NO credentials needed
+- All analysis runs offline on your machine
+- Source code: https://github.com/SingggggYee/ccwhy
+
+## Usage
 
 ```bash
 ccwhy
@@ -17,8 +30,6 @@ If not installed:
 brew install SingggggYee/tap/ccwhy
 ```
 
-Shows: token sinks (controllable vs fixed), per-project costs, tool call breakdown, anomaly sessions, peak vs off-peak comparison, and optimization suggestions.
+Or: `cargo install ccwhy`
 
-For session detail: `ccwhy session <id>`
-For JSON output: `ccwhy --json`
-For time range: `ccwhy report --days 7`
+More commands: `ccwhy session <id>`, `ccwhy sessions`, `ccwhy --json`, `ccwhy report --days 7`

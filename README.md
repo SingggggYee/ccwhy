@@ -11,20 +11,33 @@ A Claude Code usage debugger written in Rust. Parses your local session data, id
   Why did your tokens burn? What to do about it.
 
   Overview
-  Sessions: 186  |  Tokens: 3.3B  |  Cost: $6,721
+  Sessions: 187  |  Total tokens: 3.3B  |  Equivalent cost: $6,739
+  (Cost shown is API-equivalent. Max subscribers pay a flat rate.)
 
-  Top Token Sinks
-  ███████████████████░  97.2%  3.2B   Cache reads (context re-reading across turns)
-                                      → Use /compact more often.
-  █░░░░░░░░░░░░░░░░░░   2.6%  86.6M  Cache creation (CLAUDE.md, context, system prompt)
-  ████████░░░░░░░░░░░░  40.2%         Tool: Bash (7,066 calls, 40% of all tool calls)
-                                      → Long outputs consume tokens. Pipe to head/tail.
-  ████░░░░░░░░░░░░░░░░  21.3%         Tool: Read (3,744 calls, 21% of all tool calls)
-                                      → Use offset/limit params to read only needed sections.
+  Controllable Token Sinks (what you can reduce)
+  Total controllable: 93.7M (2.8% of all tokens)
+
+  ███████████████████░  92.5%  86.7M  Cache creation (CLAUDE.md, MCP, system prompt)
+                                → Large initial context. Trim unused CLAUDE.md rules or MCP tools.
+  █░░░░░░░░░░░░░░░░░░   6.6%   6.2M  Model output (Claude's responses)
+  ████████░░░░░░░░░░░░  40.2%         Tool: Bash (7,074 calls, 40% of tool calls)
+                                → Many shell commands. Long outputs eat tokens. Pipe to head/tail.
+
+  Fixed Overhead (normal, not actionable)
+  97.2%  3.2B  Cache reads (context re-read every turn — normal, cheap at $1.5/M)
+
+  Anomaly Sessions (33 sessions burning >2x average rate)
+  ⚡ 710,300 tok/min (3.9x avg)  ~/Claude Code/agent-trading
+  ⚡ 603,147 tok/min (3.3x avg)  /tmp/aca-sandbox
+
+  Peak vs Off-Peak Hours
+  Peak (Mon-Fri 5-11am PT):  42 sessions, avg 21.9M tokens/session
+  Off-peak:                  145 sessions, avg 16.5M tokens/session
+  Peak sessions use 1.3x more tokens on average.
 
   Suggestions
   1. 86 session(s) exceeded 30 turns. Use /compact to reduce context buildup.
-  2. 840 subagent calls detected. Each duplicates the full context.
+  2. 840 subagent calls. Each duplicates full context. Use Grep/Glob directly.
 ```
 
 ## Install

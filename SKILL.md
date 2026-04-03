@@ -1,35 +1,33 @@
 ---
 name: claude-usage-analyzer
 description: Analyze Claude Code token usage. Shows where tokens went, which projects cost most, and how to reduce waste. Use when user asks about token usage, costs, or burn rate.
+config_paths:
+  - ~/.claude/projects/*/*.jsonl
+requires:
+  - ccwhy
 ---
 
 # Claude Usage Analyzer
 
-Analyze your Claude Code token usage.
-
-## What it does
-
-Parses local JSONL session files in `~/.claude/projects/` to show where tokens went. Breaks down usage by project, tool, model, and identifies anomaly sessions.
+Analyze your Claude Code token usage by parsing local session logs.
 
 ## Data access
 
-- Reads ONLY `~/.claude/projects/*/*.jsonl` (local Claude Code session logs)
-- NO network access, NO API keys, NO credentials needed
-- All analysis runs offline on your machine
-- Source code: https://github.com/SingggggYee/ccwhy
+- Reads `~/.claude/projects/*/*.jsonl` (local Claude Code session logs)
+- Runs offline, no network access, no API keys, no credentials
+- Open source: https://github.com/SingggggYee/ccwhy
 
 ## Usage
+
+Requires the `ccwhy` CLI to be pre-installed. See https://github.com/SingggggYee/ccwhy for installation instructions.
 
 ```bash
 ccwhy
 ```
 
-If not installed:
+More commands:
 
-```bash
-brew install SingggggYee/tap/ccwhy
-```
-
-Or: `cargo install ccwhy`
-
-More commands: `ccwhy session <id>`, `ccwhy sessions`, `ccwhy --json`, `ccwhy report --days 7`
+- `ccwhy report --days 7` (last 7 days)
+- `ccwhy sessions` (top sessions by cost)
+- `ccwhy session <id>` (per-turn breakdown)
+- `ccwhy --json` (machine-readable output)

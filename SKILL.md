@@ -1,11 +1,11 @@
 ---
-name: ccwhy
+name: claude-usage-analyzer
 description: Analyze Claude Code token usage. Shows where tokens went, which projects cost most, and how to reduce waste. Use when user asks about token usage, costs, or burn rate.
 ---
 
-# ccwhy
+# Claude Usage Analyzer
 
-Debug your Claude Code token usage.
+Analyze your Claude Code token usage.
 
 ## What it does
 

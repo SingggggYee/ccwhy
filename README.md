@@ -158,6 +158,16 @@ ccwhy is not a replacement for ccusage. Use ccusage for daily/monthly cost track
 
 No network access. No API keys. Everything runs locally on your session data.
 
+## Also: cclint
+
+ccwhy shows you where tokens went. **[cclint](https://github.com/SingggggYee/cclint)** shows you what to fix in your config.
+
+```bash
+cargo install cclint && cclint
+```
+
+It lints your CLAUDE.md, hooks, skills, and commands for token waste. Gives you a health score and specific fixes.
+
 ## Requirements
 
 - Rust 1.75+ (for building)

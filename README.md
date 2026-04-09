@@ -18,7 +18,7 @@ A Claude Code usage debugger written in Rust. Parses your local session data, id
 <summary>Text version</summary>
 
 ```
-  claude-usage-analyzer — Claude Code Usage Debugger
+  claude-usage-analyzer - Claude Code Usage Debugger
   Why did your tokens burn? What to do about it.
 
   Overview
@@ -35,7 +35,7 @@ A Claude Code usage debugger written in Rust. Parses your local session data, id
                                 → Many shell commands. Long outputs eat tokens. Pipe to head/tail.
 
   Fixed Overhead (normal, not actionable)
-  97.2%  3.2B  Cache reads (context re-read every turn — normal, cheap at $1.5/M)
+  97.2%  3.2B  Cache reads (context re-read every turn - normal, cheap at $1.5/M)
 
   Anomaly Sessions (33 sessions burning >2x average rate)
   ⚡ 710,300 tok/min (3.9x avg)  ~/projects/my-app
@@ -117,7 +117,7 @@ claude-usage-analyzer session <session-id-prefix>
 ## What It Tells You
 
 ### Top Token Sinks
-Where your tokens actually go. Not just totals — broken down by:
+Where your tokens actually go. Not just totals - broken down by:
 - Cache reads vs cache creation vs output
 - Tool usage (Bash, Read, Edit, Agent, etc.)
 - Per-tool call counts and estimated token impact
@@ -136,10 +136,10 @@ Visual bar chart of daily consumption.
 
 ### Actionable Suggestions
 Based on your actual usage patterns:
-- "86 sessions exceeded 30 turns — use /compact"
-- "Read tool is 40% of calls — use Grep to find specific content"
-- "840 subagent calls — each duplicates full context"
-- "Write calls outnumber Edit 2:1 — Edit sends only the diff"
+- "86 sessions exceeded 30 turns - use /compact"
+- "Read tool is 40% of calls - use Grep to find specific content"
+- "840 subagent calls - each duplicates full context"
+- "Write calls outnumber Edit 2:1 - Edit sends only the diff"
 
 ## How Is This Different from ccusage?
 
@@ -185,7 +185,7 @@ ccusage answers "how much did I spend?" with cost tables and token counts. claud
 
 ### Does claude-usage-analyzer work with Claude Code on VS Code?
 
-Yes. claude-usage-analyzer reads session data from `~/.claude/projects/`, which is shared across all Claude Code clients — CLI, VS Code, and JetBrains. If you've used Claude Code, your data is already there.
+Yes. claude-usage-analyzer reads session data from `~/.claude/projects/`, which is shared across all Claude Code clients - CLI, VS Code, and JetBrains. If you've used Claude Code, your data is already there.
 
 ### How do I install claude-usage-analyzer?
 
@@ -193,7 +193,7 @@ The fastest way is `brew install SingggggYee/tap/claude-usage-analyzer` on macOS
 
 ### What does claude-usage-analyzer analyze?
 
-It parses your local Claude Code session files (JSONL) to break down token usage by project, tool, model, and time. It identifies anomaly sessions, peak/off-peak patterns, and generates optimization suggestions — all offline, no API keys needed.
+It parses your local Claude Code session files (JSONL) to break down token usage by project, tool, model, and time. It identifies anomaly sessions, peak/off-peak patterns, and generates optimization suggestions - all offline, no API keys needed.
 
 ## Requirements
 

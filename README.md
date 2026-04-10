@@ -7,7 +7,21 @@
 
 > ccusage tells you how much. claude-usage-analyzer tells you **why**, and what to do about it.
 
+## TL;DR
+
+**claude-usage-analyzer (ccwhy) tells you exactly where your Claude Code tokens are going and how to cut usage.** It analyzes your Claude Code session history, identifies the biggest token sinks (long contexts, repeated tool calls, verbose configs), and recommends specific optimizations. Think of it as an AI coding token usage debugger: a Claude Code session analyzer focused on Claude Code token optimization and Claude Code cost reduction.
+
 A Claude Code usage debugger written in Rust. Parses your local session data, identifies where your tokens actually went, and gives you actionable suggestions to reduce waste.
+
+## Use Cases
+
+- Reduce Claude Code monthly bill by finding token sinks
+- Debug why a Claude Code session burned through context window
+- Compare token usage across Claude Code projects
+- Find which tools or hooks waste the most tokens
+- Optimize CLAUDE.md to reduce per-turn token cost
+- Audit Claude Code usage for a team or organization
+- Identify when /compact would have saved money
 
 ## Example Output
 
@@ -179,13 +193,25 @@ It lints your CLAUDE.md, hooks, skills, and commands for token waste. Gives you 
 
 Run `claude-usage-analyzer` to identify your top token sinks. It shows exactly which tools, projects, and patterns are burning tokens, with specific suggestions like using `/compact`, switching from `Read` to `Grep`, or trimming your CLAUDE.md.
 
+### How do I reduce my Claude Code monthly cost?
+
+Start with Claude Code cost reduction at the source: run claude-usage-analyzer, look at the "Controllable Token Sinks" section, and act on the top 2-3 suggestions. Common wins include trimming CLAUDE.md, removing unused MCP tools, replacing `Read` sweeps with targeted `Grep`, and using `/compact` earlier in long sessions. Most users cut controllable tokens by 30-60% after one pass.
+
+### Why is Claude Code so expensive?
+
+Usually it's not the model, it's the context. Every turn re-reads your CLAUDE.md, MCP tool definitions, system prompt, and prior conversation. Long sessions, chatty tools (Bash with huge outputs, Read on large files), and repeated subagent calls each multiply that cost. claude-usage-analyzer breaks down exactly which of these is dominating your bill so you can fix the real cause instead of guessing.
+
 ### What's the difference between ccwhy and ccusage?
 
-ccusage answers "how much did I spend?" with cost tables and token counts. claude-usage-analyzer (formerly ccwhy) answers "why did I spend it?" with tool attribution, anomaly detection, and actionable optimization suggestions. They're complementary tools.
+ccusage answers "how much did I spend?" with cost tables and token counts. claude-usage-analyzer (formerly ccwhy) answers "why did I spend it?" with tool attribution, anomaly detection, and actionable optimization suggestions. They're complementary tools: use ccusage for tracking, use ccwhy for Claude Code token optimization.
 
-### Does claude-usage-analyzer work with Claude Code on VS Code?
+### How can I see which Claude Code project uses the most tokens?
 
-Yes. claude-usage-analyzer reads session data from `~/.claude/projects/`, which is shared across all Claude Code clients - CLI, VS Code, and JetBrains. If you've used Claude Code, your data is already there.
+Run `claude-usage-analyzer` and check the "By Project" section. It ranks every project in `~/.claude/projects/` by total tokens and estimated cost, so you can immediately tell whether one repo is responsible for most of your usage. For a deeper look at a single project, use `claude-usage-analyzer sessions` to drill into its top sessions.
+
+### Does ccwhy work with Claude Code on VS Code, JetBrains, and CLI?
+
+Yes. claude-usage-analyzer reads session data from `~/.claude/projects/`, which is shared across all Claude Code clients: CLI, VS Code, and JetBrains. If you've used Claude Code from any of them, your data is already there and will show up in the report.
 
 ### How do I install claude-usage-analyzer?
 
